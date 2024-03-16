@@ -10,8 +10,8 @@
     <link rel="stylesheet"  type="text/css" href="CSS/style.css">
     <link rel="stylesheet"  type="text/css" href="CSS/calendar.css">
     <link rel="icon" type="image/x-icon" href="Images/Favicon.png">
-    <script src="JS/script.js"></script>
-    <script type="module" src="JS/db.js"></script>
+    <script type="module" src="JS/uploading.js"></script>
+    <script src="JS/others.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 <body>
@@ -71,6 +71,7 @@
                 </label>
                 <div class="title"><h2>Submits of the Day</h2></div>
                 <p class="description">A collection of brave work from challengers of Design Crony</p>
+                <button id="googleLogin">Admin Login</button>
                 <div class="uploadButtons">
                 <input type="text" id="datePicker" readonly>
                 <button class="uploadButton">
@@ -85,22 +86,19 @@
         <div id="countdownContainer">
             <p id="countdown"></p>
             </div>
-             <div id="uploadModal" class="modal">
+            <div id="uploadModal" class="modal">
                 <div class="modal-content">
                     <span class="close">&times;</span>
                     <label class="file-input-label" for="imageInput">Choose File</label>
-<input type="file" id="imageInput" accept="image/*">
-<div id="imagePreviewContainer">
-    <div id="imagePreview"></div>
-  </div>
+                    <input type="file" id="imageInput" accept="image/*">
+                    <div id="imagePreviewContainer">
+                    <div id="imagePreview"></div>
+                    </div>
                     <textarea id="descriptionInput" placeholder="Enter a description for the image"></textarea>
                     <input type="file" id="imageInput" accept="image/*">
                     <button id="uploadSubmit" disabled>Upload</button>
                 </div>
-  </div>
-  <div id="imgur-gallery" class="imgur-gallery">
-    <!-- Images will be inserted here by the JavaScript -->
-  </div>
-    </body>
+         </div>
+      </body>
     </html>
 

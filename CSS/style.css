@@ -375,7 +375,7 @@
 }
 
 #imageInput, #descriptionInput {
-  background-color: var(--input-bg-color);
+  background-color: var(--button-bg-color);
   color: var(--input-text-color);
   border: 0.0625em solid var(--input-border-color);
   border-radius: 0.5em;
