@@ -247,8 +247,7 @@
  .submitImage {
   display: block;
   border-radius: 0.5em;
-  max-width: 31.25em;
-  max-height: 31.25em;
+  width: 30em;
  }
  
  .uploadButtons {
@@ -266,8 +265,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 20rem;
+    width: auto;
   }
+
+  .submitImage {
+    display: block;
+    border-radius: 0.5em;
+    max-width: 20em;
+   }
  
   body {
     justify-content: flex-start;
