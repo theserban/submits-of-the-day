@@ -81,7 +81,7 @@ function adjustUploadButtonVisibility() {
     if (isToday) {
         uploadButton.style.display = ""; // Show the button if it's today
     } else {
-        uploadButton.style.display = "none"; // Hide the button if it's not today
+        uploadButton.style.display = "hidden"; // Hide the button if it's not today
     }
 }
 
