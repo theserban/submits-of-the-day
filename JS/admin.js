@@ -57,20 +57,6 @@ function googleSignIn() {
     });
 }
 
-// Function to initialize the theme switcher
-function initializeThemeSwitcher() {
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    const themeToggle = document.getElementById('themeToggle');
-    themeToggle.checked = savedTheme === 'dark';
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-    });
-}
-
 // DOMContentLoaded listener to initialize functionalities
 document.addEventListener('DOMContentLoaded', () => {
     initializeThemeSwitcher();
