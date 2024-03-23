@@ -3,6 +3,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebas
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
 import { getDatabase } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -28,36 +29,33 @@ provider.setCustomParameters({
   client_id: '6576848992-tfjhi3b4bgq8dn5qd2ataeepdd51cgcp.apps.googleusercontent.com' // Replace with your actual web client ID
 });
 
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Auth state change listener
+    onAuthStateChanged(auth, (user) => {
+      const actionElements = document.querySelectorAll('.voteUp, .voteDown, .uploadButton');
+      
+      if (user) {
+        // User is signed in, show the buttons
+        actionElements.forEach(element => element.style.display = ''); // Or 'block', 'inline-block', etc., as appropriate
+      } else {
+        // No user is signed in, keep the buttons hidden
+        actionElements.forEach(element => element.style.display = 'none');
+      }
+    });
+  });
+
 // Function to handle Google sign-in
 function googleSignIn() {
     signInWithPopup(auth, provider)
     .then((result) => {
-        // The signed-in user info
-        const user = result.user;
-
-        // Creating elements to display user's information
-        const userInfoDiv = document.getElementById('user-info');
-        userInfoDiv.innerHTML = ''; // Clear previous information
-        const displayNameEl = document.createElement('p');
-        const emailEl = document.createElement('p');
-
-        displayNameEl.textContent = `Name: ${user.displayName}`;
-        emailEl.textContent = `Email: ${user.email}`;
-
-        // Appending the new elements to the 'user-info' div
-        userInfoDiv.appendChild(displayNameEl);
-        userInfoDiv.appendChild(emailEl);
-
-        // Optionally, hide the login button after successful login
-        document.getElementById('google-login').style.display = 'none';
-
+        // Handle the signed-in user information
+        // ...
     }).catch((error) => {
         // Handle errors here
-        console.error('SignIn error', error.code, error.message);
-        // Optionally, display an error message to the user
+        // ...
     });
 }
-
 
 // Function to initialize the theme switcher
 function initializeThemeSwitcher() {
