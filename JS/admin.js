@@ -32,13 +32,32 @@ provider.setCustomParameters({
 function googleSignIn() {
     signInWithPopup(auth, provider)
     .then((result) => {
-        // Handle the signed-in user information
-        // ...
+        // The signed-in user info
+        const user = result.user;
+
+        // Creating elements to display user's information
+        const userInfoDiv = document.getElementById('user-info');
+        userInfoDiv.innerHTML = ''; // Clear previous information
+        const displayNameEl = document.createElement('p');
+        const emailEl = document.createElement('p');
+
+        displayNameEl.textContent = `Name: ${user.displayName}`;
+        emailEl.textContent = `Email: ${user.email}`;
+
+        // Appending the new elements to the 'user-info' div
+        userInfoDiv.appendChild(displayNameEl);
+        userInfoDiv.appendChild(emailEl);
+
+        // Optionally, hide the login button after successful login
+        document.getElementById('google-login').style.display = 'none';
+
     }).catch((error) => {
         // Handle errors here
-        // ...
+        console.error('SignIn error', error.code, error.message);
+        // Optionally, display an error message to the user
     });
 }
+
 
 // Function to initialize the theme switcher
 function initializeThemeSwitcher() {
