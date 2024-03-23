@@ -807,3 +807,8 @@
         transform: translatex(-50%);
       }
   }
+
+  .imgurLink {
+    text-decoration: none;
+  }
+  
