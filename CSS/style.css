@@ -149,12 +149,6 @@
   background-color: var(--button-hover-bg-color);
  }
 
- .voteUp,
- .voteDown,
- .uploadButton{
-  display: none;
-}
- 
  .description {
   font-size: 1em;
   text-align: center;
