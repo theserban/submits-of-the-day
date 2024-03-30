@@ -1,7 +1,3 @@
-
-
-
-
 // Initialize Firebase and Firebase services
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
@@ -9,14 +5,7 @@ import { getDatabase, set, ref, get } from "https://www.gstatic.com/firebasejs/1
 import { getAuth, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCn9OwLaTiuMBQg5VcBqIZe1TuU_J_yZh0",
-  authDomain: "submit-cronies.firebaseapp.com",
-  databaseURL: "https://submit-cronies-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "submit-cronies",
-  storageBucket: "submit-cronies.appspot.com",
-  messagingSenderId: "6576848992",
-  appId: "1:6576848992:web:afcabfac033ee76fec4305",
-  measurementId: "G-ZPLQ97XYTK"
+//Your Firebase Config
 };
 
 // Firebase app initialization
@@ -135,7 +124,7 @@ function adjustUploadButtonVisibility() {
     
             fetch("https://api.imgur.com/3/image/", {
                 method: "POST",
-                headers: { Authorization: "Client-ID bf58c0f5b4ed673" }, // Use your actual Imgur Client-ID
+                headers: { Authorization: "Client-ID [You-ID]}" }, // Use your actual Imgur Client-ID
                 body: formData
             })
             .then(response => response.json())

@@ -6,14 +6,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from
 
 // Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCn9OwLaTiuMBQg5VcBqIZe1TuU_J_yZh0",
-  authDomain: "submit-cronies.firebaseapp.com",
-  databaseURL: "https://submit-cronies-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "submit-cronies",
-  storageBucket: "submit-cronies.appspot.com",
-  messagingSenderId: "6576848992",
-  appId: "1:6576848992:web:afcabfac033ee76fec4305",
-  measurementId: "G-ZPLQ97XYTK"
+//Your Firebase Config
 };
 
 // Initialize Firebase and services
@@ -25,7 +18,7 @@ auth.languageCode = 'en'; // Set default language for auth
 
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({
-  client_id: '6576848992-tfjhi3b4bgq8dn5qd2ataeepdd51cgcp.apps.googleusercontent.com' // Replace with your actual web client ID
+  client_id: '' // Replace with your actual web client ID
 });
 
 // Function to handle Google sign-in
