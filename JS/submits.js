@@ -5,7 +5,7 @@ import { getDatabase, set, ref, get } from "https://www.gstatic.com/firebasejs/1
 import { getAuth, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
 const firebaseConfig = {
-//Your Firebase Config
+ //Your firebase Config
 };
 
 // Firebase app initialization
@@ -114,6 +114,7 @@ function adjustUploadButtonVisibility() {
         const submitter = nameInput.value.trim() || 'Anonymous';
         const branding = brandingInput.value.trim();
         const portfolio = portfolioInput.value.trim();
+        const email = emailInput.value.trim();
     
         if (file && description && branding) {
             uploadSubmit.disabled = true; // Disable button to prevent multiple uploads
@@ -124,13 +125,13 @@ function adjustUploadButtonVisibility() {
     
             fetch("https://api.imgur.com/3/image/", {
                 method: "POST",
-                headers: { Authorization: "Client-ID [You-ID]}" }, // Use your actual Imgur Client-ID
+                headers: { Authorization: "Client-ID Your Imgur ID" }, // Use your actual Imgur Client-ID
                 body: formData
             })
             .then(response => response.json())
             .then(result => {
                 const imgUrl = result.data.link;
-                saveToFirebase(description, imgUrl, submitter, branding, portfolio);
+                saveToFirebase(description, imgUrl, submitter, branding, portfolio, email);
                 resetForm();
             })
             .catch(error => {
@@ -160,9 +161,9 @@ function adjustUploadButtonVisibility() {
         themeToggle.addEventListener('click', toggleTheme);
     });
 
-    function saveToFirebase(description, imgUrl, submitter, branding, portfolio) {
+    function saveToFirebase(description, imgUrl, submitter, branding, portfolio, email) {
         const submissionRef = ref(db, 'submissions/' + Date.now());
-        set(submissionRef, { description, imgUrl, timestamp: Date.now(), votes: 0, submitter, branding, portfolio });
+        set(submissionRef, { description, imgUrl, timestamp: Date.now(), votes: 0, submitter, branding, portfolio, email }); // Include 'email' here
     }
 
     function initializeFlatpickr() {
@@ -303,6 +304,21 @@ function adjustUploadButtonVisibility() {
         }
       });
 
+      // Listen for changes to the file input and update UI accordingly
+imageInput.addEventListener('change', function() {
+    toggleUploadButtonState(); // Existing call to toggle the upload button state
+    
+    // New logic to display the file name
+    const fileNameDisplay = document.getElementById('fileNameDisplay');
+    const file = imageInput.files[0]; // Assuming single file selection
+    
+    if (file) {
+        fileNameDisplay.textContent = `${file.name}`; // Update the text content
+    } else {
+        fileNameDisplay.textContent = ''; // Clear the text content if no file is selected
+    }
+});
+
     
     // Reset form and modal after successful upload
     function resetForm() {
@@ -356,8 +372,26 @@ function adjustUploadButtonVisibility() {
     function createSubmissionElement(submission, key) {
         const submitContainer = document.createElement('div');
         submitContainer.classList.add('submitContainer');
+        const emailSubject = encodeURIComponent(`Feedback for my fellow Design Crony, ${submission.submitter}`);
+        const emailBody = encodeURIComponent(`Hi ${submission.submitter},\n\nJust caught a glimpse of "${submission.description}" on Design Crony, and wow, I'm really blown away by what you've created! Your work is a breath of fresh air, and it's clear you have a natural flair for design. You are for sure a ${submission.branding}.\n\nKeep up the amazing work. I can't wait to see more of your designs on Design Crony. Let's keep pushing the envelope and making awesome things happen.\n\nCheers to more creativity,`);
+        auth.onAuthStateChanged((user) => {
+            if (!user) {
+              // User is not logged in, hide vote buttons
+              const voteButtons = submitContainer.querySelectorAll('.voteUp, .voteDown');
+              voteButtons.forEach(button => {
+                button.style.display = 'none'; // Hide vote buttons
+              });
+            }
+            // If the user is logged in, the buttons are not modified and remain visible
+          });
+          
+        const ccEmail = "feedback@designcrony.com"; 
+        const ccParameter = encodeURIComponent(ccEmail);
+
+        const emailLink = submission.email ? `mailto:${submission.email}?cc=${ccParameter}&subject=${emailSubject}&body=${emailBody}` : '#';
+        const emailLinkHTML = submission.email ? `<a href="${emailLink}" target="_blank">Send Feedback</a>` : "N/A";    
         submitContainer.innerHTML = `
-            <p class="submitDescription">${submission.description}&nbsp;<a class="imgurLink" href="${submission.imgUrl}" target="_blank"><svg class="feather" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a></p>
+            <p class="submitDescription"><a class="imgurLink" href="${submission.imgUrl}" target="_blank"><svg class="feather" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>&nbsp;${submission.description}</p>
             
             <div class="submitItem">
                 <img src="${submission.imgUrl}" alt="Uploaded Image" class="submitImage">
@@ -389,10 +423,11 @@ function adjustUploadButtonVisibility() {
 </div>
             <div id="userInfoModal-${key}" class="userInfoModal">
                 <div class="userInfoModal-content">
-                    <span hidden class="userInfoModal-close">&times;</span>
+                    <span class="userInfoModal-close">&times;</span>
                     <p><b>${submission.submitter || "Anonymous"}</b></p>
-                    <p>${submission.branding || "N/A"}</p>
-                    <p>${submission.portfolio ? `<a href="${submission.portfolio}" target="_blank">Portfolio</a>` : "N/A"}</p>   
+                    <p>${submission.branding || "No Email"}</p>
+                    <p>${submission.portfolio ? `<a href="${submission.portfolio}" target="_blank">View Portfolio</a>` : "N/A"}</p>   
+                    <p>${emailLinkHTML}</p>
                 </div>
             </div>
         `;
@@ -476,4 +511,3 @@ function adjustUploadButtonVisibility() {
             console.log('You are trying to vote the same way as before.');
         }
     }
-    

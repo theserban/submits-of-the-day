@@ -7,7 +7,7 @@
     <title>Submits of the Day by Design Crony</title>
     <link href="/Fonts/Lexend.ttf" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet"  type="text/css" href="CSS/style.css">
+    <link rel="stylesheet"  type="text/css" href="CSS/submits.css">
     <link rel="stylesheet"  type="text/css" href="CSS/calendar.css">
     <link rel="icon" type="image/x-icon" href="Images/Favicon.png">
     <script type="module" src="JS/submits.js"></script>
@@ -59,19 +59,21 @@
             }
         }
     </style>
-    <div>
-        <div>
+    </div>
+        <div class="Center">
             <div class="logo">
-                <img src="Images/logo.svg" width="120" height="80" alt="Design Crony Logo">
+                <a href=""> <img src="Images/logo.svg" width="120" height="80"></a>
             </div>
             <div class="appContainer">
                 <label class="switch">
                     <input type="checkbox" id="themeToggle">
                     <span class="slider round"></span>
                 </label>
-                <div class="title"><h2>Submits of the Day</h2></div>
-                <p class="description">A collection of brave work from challengers of Design Crony</p>
-                <p class="description"><a id="google-login" class="google-login-button">Log in</a> to post and vote.</p>
+                <div class="title"><h2>Design Crony</h2></div>
+                <p class="description">Join the challenges:
+                <a href="/briefs">Briefs</a> <a href="/colors">Colors</a></p>
+                <p class="description login">Please <a id="google-login" class="google-login-button">log in</a> to post and vote</p>
+                <p class="description logout">You can <a id="google-logout" class="google-login-button">log out</a> when you're done</p>
                 <div class="uploadButtons">
                 <input type="text" id="datePicker" readonly>
                 <button class="uploadButton">
@@ -91,21 +93,22 @@
                 </div>
             <p id="countdown"></p>
             </div>
+            <div id="modalOverlay">
+                <div id="loginAlert"></div>
+                <div id="logoutAlert"></div>
+              </div>
             <div id="uploadModal" class="modal">
                 <div class="modal-content">
-                  <span hidden class="close">&times;</span>
+                  <span class="close">&times;</span>
                   <h3>Enter the battle</h3>
                   <label class="file-input-label" for="imageInput">Choose File</label>
                   <input type="file" id="imageInput" accept="image/*" required>
-                  <div class="name-branding-container">
                     <input type="text" id="nameInput" placeholder="Your Name" maxlength="16" required>
                     <input type="text" id="brandingInput" placeholder="2 Word Branding" maxlength="20" required>
-                  </div>
+                  <input type="text" id="emailInput" placeholder="Your Email" required>
                   <input type="url" id="portfolioInput" placeholder="Portfolio Link" required>
-                  <textarea id="descriptionInput" placeholder="Enter a description for the image" required></textarea>
-                  <div id="imagePreviewContainer" style="display: none;">
-                    <img id="imagePreview" src="" alt="Image preview" class="previewImage">
-                  </div>
+                  <textarea style="resize: none;" id="descriptionInput" placeholder="Enter a description for the image" required></textarea>
+                  <span id="fileNameDisplay"></span>
                   <button id="uploadSubmit" disabled>Upload</button>
                 </div>
               </div>

@@ -25,17 +25,19 @@
   filter: invert(100%);
  }
  
- body {
+body {
   font-family: 'Lexend', sans-serif;
-  justify-content: center;
-  align-items: center;
   margin: 0;
   background-color: var(--background-color);
   color: var(--text-color);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
- }
+  text-align: center;
+  max-width: 100%;
+  justify-content: center;
+  align-items: center;
+}
  
  .github-logo {
   fill: var(--container-bg-color);
@@ -56,47 +58,33 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: auto;
+  width: inherit;
  }
-
-.disabled {
+ 
+ .disabled {
   opacity: 0.3;
   pointer-events: none;
-}
-
-
+ }
+ 
  .submitContainer {
   background-color: var(--background-color);
   border-radius: 1.875em;
-  padding-left: 1.5em;
-  padding-right: 1.5em;
-  padding-bottom: 0.8em;
+  padding-top: 0.4em;
+  padding: 1.4em;
   margin-bottom: 2em;
   margin-top: 1em;
   box-shadow: 0 0.125em 0.225em rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: auto;
-  transition: transform 0.3s ease-in-out;
+  max-width: 30em;
  }
  
  .feather {
   color: var(--text-color);
  }
  
- .voteButtons {
-  background-color: var(--container-bg-color);
-  border-radius: 0.5em;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  box-shadow: 0 0.0625em 0.1875em rgba(0, 0, 0, 0.2);
-  margin: 0.3125em;
-  font-size: 1em;
-  margin-top: 1em;
- }
- 
+ .voteButtons,
  .postInfo {
   background-color: var(--container-bg-color);
   border-radius: 0.5em;
@@ -107,7 +95,7 @@
   font-size: 1em;
   margin-top: 1em;
  }
-
+ 
  .voteUp,
  .voteDown {
   padding: 0.3125em;
@@ -148,20 +136,23 @@
  .voteDown:hover {
   background-color: var(--button-hover-bg-color);
  }
-
+ 
  .description {
   font-size: 1em;
   text-align: center;
-  margin: 0em;
+  margin: 0;
   padding: 0.375em;
-  max-width: 20em; 
+  max-width: 20em;
  }
-
- .description a {
- border-bottom: solid 0.01em;
- cursor: pointer;
-}
-
+ 
+ .description a,
+ .userInfoModal a {
+  border-bottom: solid 0.01em;
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+ }
+ 
  .buttonContainer {
   margin-bottom: 0.4em;
  }
@@ -238,11 +229,11 @@
   max-height: 3em;
  }
  
- .title h2{
+ .title h2 {
   margin-bottom: 0.4em;
-  padding: 0em;
+  padding: 0;
  }
-
+ 
  .black-fill {
   filter: grayscale(100%);
  }
@@ -252,16 +243,17 @@
  }
  
  .submitItem {
-  position: relative; /* Add this line */
+  position: relative;
   overflow: hidden;
   display: flex;
   max-width: inherit;
-}
+ }
  
  .submitDescription {
   font-size: 1em;
   max-width: 30em;
-  margin: 1.8em 0em 1.8em 0em;
+  margin-bottom: 1.8em;
+  margin-top: 0em;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -270,10 +262,8 @@
  .submitImage {
   display: block;
   border-radius: 0.5em;
-  width: 100%; /* Adjusted to ensure the image scales correctly */
-  max-width: 30em; /* Optional based on your design needs */
-  min-width: 30em;
-}
+  width: 100%;
+ }
  
  .uploadButtons {
   display: flex;
@@ -282,312 +272,322 @@
   margin-bottom: 0.625em;
  }
  
- @media (max-width: 30em) {
-  .submitContainer {
-    background-color: var(--background-color);
-    border-radius: 1.4em;
-    box-shadow: 0 0.125em 0.225em rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: auto;
-  }
-
-  .submitImage {
-    display: block;
-    border-radius: 0.5em;
-    max-width: 20em;
-   }
- 
-  body {
-    justify-content: flex-start;
-    align-items: flex-start;
-    height: auto;
-    margin-top: 0;
-    background-color: var(--container-bg-color);
-  }
- 
-  .logo {
-    margin-top: 0;
-  }
- 
-  .appContainer {
-    background-color: transparent;
-    box-shadow: none;
-    border: none;
-    width: auto;
-    padding-bottom: 0;
-  }
-
-  #countdownContainer {
-    padding: 0;
-    text-align: center;
-    margin-top: 0;
-    margin-bottom: 0;
-  }
- 
-  #countdown {
-    margin-top: 0.25em;
-    margin-bottom: 0;
-  }
- 
-  .github-logo {
-    fill: var(--background-color);
-    color: var(--text-color);
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
- 
-  #countdownContainer {
-    text-align: center;
-    font-size: 1em;
-  }
- 
-  .leftSection {
-    display: flex;
-    align-items: center;
-  }
- 
-  #logoPicture {
-    margin-left: 0.625em;
-    max-height: 2.4em;
-    max-width: 4.8em;
-    display: initial;
-  }
- }
- 
  .modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
- }
- 
- .modal-content {
-  background-color: var(--container-bg-color);
-  margin: 15% auto;
-  padding: 1.25em;
-  padding-top: 0em;
-  border: none;
-  width: auto;
-  border-radius: 1.5em;
-  box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  max-width: 25rem;
-  font-family: 'Lexend', sans-serif;
-  color: var(--text-color);
-  text-align: center;
+  display: none
+  ;
+ position: fixed;
+ z-index: 1;
+ left: 0;
+ top: 0;
+ width: 100%;
+ height: 100%;
+ overflow: auto;
+ background-color: rgba(0, 0, 0, 0.4);
+ align-items: center;
+}
+
+.modal-content {
+ background-color: var(--container-bg-color);
+ margin: 15% auto;
+ padding: 1.25em;
+ padding-top: 0;
+ border: none;
+ border-radius: 1.5em;
+ box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
+ display: flex;
+ flex-direction: column;
+ width: auto;
+ max-width: fit-content;
+ font-family: 'Lexend', sans-serif;
+ color: var(--text-color);
+ text-align: center;
 }
 
 .close {
-  color: var(--text-color);
-  float: right;
-  font-size: 1.75em;
-  font-weight: bold;
-  cursor: pointer;
-  transition: color 0.3s ease;
+ color: var(--text-color);
+ float: right;
+ font-size: 1.5em;
+ font-weight: bold;
+ cursor: pointer;
+ transition: color 0.3s ease;
+ margin-top: 1em;
 }
 
+.userInfoModal-close {
+ color: var(--text-color);
+ float: right;
+ font-size: 1.5em;
+ font-weight: bold;
+ cursor: pointer;
+ transition: color 0.3s ease;
+ margin-bottom: 0.5em;
+ margin-top: 0;
+}
+
+#modalOverlay {
+ position: fixed;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ background-color: rgba(0, 0, 0, 0.4);
+ display: none;
+ justify-content: center;
+ align-items: center;
+ z-index: 999;
+}
+
+#logoutAlert,
+#loginAlert {
+ background-color: var(--container-bg-color);
+ padding: 1.25em;
+ border-radius: 0.625em;
+ box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.2);
+ position: relative;
+ z-index: 1000;
+ max-width: 90%;
+ text-align: center;
+}
+
+.userInfoModal-close:hover,
 .close:hover {
-  color: var(--button-hover-bg-color);
+ color: var(--button-hover-bg-color);
 }
 
-#imageInput{
-  background-color: var(--button-bg-color);
-  border: 0.0625em solid var(--input-border-color);
-  border-radius: 0.5em;
-  padding: 0.5em;
-  font-family: 'Lexend', sans-serif;
-  font-size: 1em;
-  margin-bottom: 1em;
-  display: none;
+#imageInput {
+ background-color: var(--button-bg-color);
+ border: 0.0625em solid var(--input-border-color);
+ border-radius: 0.5em;
+ padding: 0.5em;
+ font-family: 'Lexend', sans-serif;
+ font-size: 1em;
+ margin-bottom: 1em;
+ display: none;
 }
-
-#descriptionInput {
-  background-color: var(--button-bg-color);
-  border: 0.0625em solid var(--input-border-color);
-  border-radius: 0.5em;
-  padding: 0.5em;
-  font-family: 'Lexend', sans-serif;
-  font-size: 1em;
-  margin-bottom: 1em;
-}
-
 
 .file-input-label {
-  display: inline-block;
-  background-color: var(--button-bg-color);
-  color: var(--text-color);
-  border: none;
-  border-radius: 0.5em;
-  cursor: pointer;
-  padding: 0.7em 1em 0.5em;
-  box-shadow: 0 0.125em 0.25em rgba(0, 0, 0, 0.1);
-  font-family: 'Lexend', sans-serif;
-  font-size: 1em;
-  transition: background-color 0.3s ease;
-  margin-bottom: 1em;
+ display: inline-block;
+ background-color: var(--button-bg-color);
+ color: var(--text-color);
+ border: none;
+ border-radius: 0.5em;
+ cursor: pointer;
+ padding: 0.7em 1em 0.5em;
+ box-shadow: 0 0.125em 0.25em rgba(0, 0, 0, 0.1);
+ font-family: 'Lexend', sans-serif;
+ font-size: 1em;
+ transition: background-color 0.3s ease;
+ margin-bottom: 1em;
 }
 
 .file-input-label:hover {
-  background-color: var(--button-hover-bg-color);
-}
-
-/* Disable textarea dragging */
-#descriptionInput {
-  resize: none; /* Prevent resizing */
-  user-select: none; /* Prevent text selection */
-  -webkit-user-drag: none; /* Disable dragging */
-}
-
-#descriptionInput {
-  resize: vertical;
-  min-height: 5em;
+ background-color: var(--button-hover-bg-color);
 }
 
 #uploadSubmit {
-  background-color: var(--button-bg-color);
-  color: var(--text-color);
-  border: none;
-  border-radius: 0.5em;
-  cursor: pointer;
-  padding: 0.7em 1em 0.5em;
-  box-shadow: 0 0.125em 0.25em rgba(0, 0, 0, 0.1);
-  font-family: 'Lexend', sans-serif;
-  font-size: 1em;
-  align-self: center;
-  transition: background-color 1s ease;
+ background-color: var(--button-bg-color);
+ color: var(--text-color);
+ border: none;
+ border-radius: 0.5em;
+ cursor: pointer;
+ padding: 0.7em 1em 0.5em;
+ box-shadow: 0 0.125em 0.25em rgba(0, 0, 0, 0.1);
+ font-family: 'Lexend', sans-serif;
+ font-size: 1em;
+ align-self: center;
+ transition: background-color 1s ease;
 }
 
 #uploadSubmit:hover {
-  background-color: var(--button-hover-bg-color);
+ background-color: var(--button-hover-bg-color);
 }
 
 #imagePreviewContainer {
-  width: auto;
-  margin-bottom: 1rem;
+ width: auto;
+ margin-bottom: 1rem;
 }
 
 .previewImage {
-  display: block;
-  border-radius: 0.5em;
-  min-width: 30em;
-  max-width: 30em;
- }
+ display: block;
+ border-radius: 0.5em;
+ min-width: 30em;
+ max-width: 30em;
+}
 
- .userInfoModal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  text-decoration: none;
-  background-color: rgba(0, 0, 0, 0.4);
+.userInfoModal {
+ display: none;
+ position: fixed;
+ z-index: 1;
+ left: 0;
+ top: 0;
+ width: 100%;
+ height: 100%;
+ overflow: auto;
+ text-decoration: none;
+ background-color: rgba(0, 0, 0, 0.4);
 }
 
 .userInfoModal p {
-  margin-top: 0; /* Adjust space before each paragraph */
-  margin-bottom: 10px; /* Adjust space after each paragraph */
-}
-
-.userInfoModal a {
-  color: var(--text-color);
-  text-decoration: none;
-  border-bottom: solid 0.01em;
+ margin-top: 0;
+ margin-bottom: 10px;
 }
 
 .userInfoModal-content {
-  background-color: var(--container-bg-color);
-  margin: 15% auto;
-  padding: 1.3em;
-  border: none;
-  width: auto;
-  border-radius: 1.5em;
-  box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  max-width: fit-content;
-  min-width: 10rem;
-  font-family: 'Lexend', sans-serif;
-  color: var(--text-color);
-  position: relative;
-  text-align: center;
+ background-color: var(--container-bg-color);
+ margin: 15% auto;
+ padding: 1.3em;
+ border: none;
+ width: auto;
+ border-radius: 1.5em;
+ box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
+ display: flex;
+ flex-direction: column;
+ max-width: fit-content;
+ min-width: 10em;
+ font-family: 'Lexend', sans-serif;
+ color: var(--text-color);
+ position: relative;
+ text-align: center;
 }
 
-
-.userInfoModal-close:hover {
-  color: var(--button-hover-bg-color);
-}
-
-#nameInput{
-  background-color: var(--button-bg-color);
-  border: 0.0625em solid var(--input-border-color);
-  border-radius: 0.5em;
-  padding: 0.5em;
-  width: 10rem;
-  font-family: 'Lexend', sans-serif;
-  font-size: 1em;
-  margin-bottom: 1em;
+.Center {
+ text-align: center;
+ align-items: center;
 }
 
 #brandingInput,
+#nameInput,
+#emailInput,
 #portfolioInput {
-  background-color: var(--button-bg-color);
-  border: 0.0625em solid var(--input-border-color);
-  border-radius: 0.5em;
-  padding: 0.5em;
-  font-family: 'Lexend', sans-serif;
-  font-size: 1em;
-  margin-bottom: 1em;
+ color: var(--text-color);
+ background-color: var(--button-bg-color);
+ border: 0.0625em solid var(--input-border-color);
+ border-radius: 0.5em;
+ padding: 0.5em;
+ font-family: 'Lexend', sans-serif;
+ font-size: 1em;
+ margin-bottom: 1em;
+}
+
+#descriptionInput {
+ color: var(--text-color);
+ background-color: var(--button-bg-color);
+ border: 0.0625em solid var(--input-border-color);
+ border-radius: 0.5em;
+ padding: 0.5em;
+ font-family: 'Lexend', sans-serif;
+ font-size: 1em;
+ margin-bottom: 0.2em;
 }
 
 .submitInfoAndVotes {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  text-align: ;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ width: 100%;
+ text-align: ;
 }
 
 .imgurLink {
-  text-decoration: none;
+ text-decoration: none;
 }
 
 .userInfo {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  border: none;
-  border-radius: 0.5em;
-  cursor: pointer;
-  font-family: 'Lexend', sans-serif;
-  font-size: 1em;
-  display: flex;
-  align-items: center;
-  padding: 0.5em; /* Adjust as needed */
+ background-color: var(--background-color);
+ color: var(--text-color);
+ border: none;
+ cursor: pointer;
+ font-family: 'Lexend', sans-serif;
+ font-size: 1em;
+ display: flex;
+ align-items: center;
+ padding: 0.5em;
 }
 
 .submitterName {
-  margin-left: 0.3em;
+ margin-left: 0.3em;
 }
 
 .voteButtonsContainer {
-  display: flex;
-  justify-content: flex-end;
-  width: auto;
+ display: flex;
+ justify-content: flex-end;
+ width: auto;
 }
 
-.name-branding-container {
-  display: flex;
-  gap: 0.8rem; 
+#fileNameDisplay {
+ overflow: hidden;
+ white-space: nowrap;
+ text-overflow: ellipsis;
+ display: inline-block;
+ text-align: center;
+ max-width: 10em;
+ margin-bottom: 1em;
 }
 
+@media (max-width: 480px) {
+ .submitContainer {
+   background-color: var(--background-color);
+   border-radius: 1.4em;
+   box-shadow: 0 0.125em 0.225em rgba(0, 0, 0, 0.1);
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   max-width: 100%; /* Add this line */
+    box-sizing: border-box; /* Add this line */
+    padding: 1em;
+ }
+
+ body {
+  justify-content: flex-start; /* Align items at the start (top) */
+    align-items: center; /* Center horizontally */
+    height: auto;
+    margin-top: 0;
+    background-color: var(--container-bg-color);
+ }
+
+ .logo {
+   margin-top: 0;
+ }
+
+ .appContainer {
+   background-color: transparent;
+   box-shadow: none;
+   border: none;
+   width: auto;
+   padding-bottom: 0;
+   padding-top: 0em;
+ }
+
+ #countdownContainer {
+   padding: 0;
+   text-align: center;
+   margin-top: 0;
+   margin-bottom: 0;
+ }
+
+ #countdown {
+   margin-top: 0.25em;
+   margin-bottom: 0;
+ }
+
+ .github-logo {
+   fill: var(--background-color);
+   color: var(--text-color);
+   position: absolute;
+   top: 0;
+   border: 0;
+   right: 0;
+   aria-hidden: true;
+ }
+
+ #countdownContainer {
+   text-align: center;
+   font-size: 1em;
+ }
+
+ .submitImage {
+   display: block;
+   border-radius: 0.5em;
+   max-width: 100%;
+ }
+}
