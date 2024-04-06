@@ -18,7 +18,7 @@ auth.languageCode = 'en'; // Set default language for auth
 
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({
-  client_id: '6576848992-tfjhi3b4bgq8dn5qd2ataeepdd51cgcp.apps.googleusercontent.com' // Replace with your actual web client ID
+  client_id: '' // Replace with your actual web client ID
 });
 
 // Function to handle Google sign-in
